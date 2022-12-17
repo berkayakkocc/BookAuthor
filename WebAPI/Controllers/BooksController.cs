@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         {
             return await _bookService.UpdateEntity(tEntity);
         }
-        [HttpGet()]
+        [HttpPost()]
         [Route("get-all-book")]
         public GenericResponseDto<List<BookDto>> GetAllEntity(GenericInputDto<NoContent> tEntity)
         {

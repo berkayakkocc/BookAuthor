@@ -51,7 +51,7 @@ namespace Service
 
         public async Task<GenericResponseDto<NoContent>> UpdateEntity(GenericInputDto<UpdateAuthorDto> tEntity)
         {
-            Author author = _mapper.Map<Author>(tEntity);
+            Author author = _mapper.Map<Author>(tEntity.Data);
             await _genericAuthorCrudRepository.Update(author);
             return GenericResponseDto<NoContent>.ResponseData(new NoContent(), (int)ErrorEnum.Success, null);
         }

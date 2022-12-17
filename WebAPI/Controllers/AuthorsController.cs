@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
         {
             return await _authorService.UpdateEntity(tEntity);
         }
-        [HttpGet()]
+        [HttpPost()]
         [Route("get-all-author")]
         public GenericResponseDto<List<AuthorDto>> GetAllEntity(GenericInputDto<NoContent> tEntity)
         {

@@ -45,7 +45,9 @@ namespace Service
                        .Include(x => x.Author)
                       
                           .ToList<Book>();
-            return GenericResponseDto<List<BookDto>>.ResponseData(_mapper.Map<List<BookDto>>(resultValues), (int)ErrorEnum.Success, null);
+
+            var mappedResult = _mapper.Map<List<BookDto>>(resultValues);
+            return GenericResponseDto<List<BookDto>>.ResponseData(mappedResult, (int)ErrorEnum.Success, null);
         }
 
         public async Task<GenericResponseDto<BookDto>> GetByIdEntity(int id)
@@ -58,7 +60,7 @@ namespace Service
 
         public async Task<GenericResponseDto<NoContent>> UpdateEntity(GenericInputDto<UpdateBookDto> tEntity)
         {
-            Book book = _mapper.Map<Book>(tEntity);
+            Book book = _mapper.Map<Book>(tEntity.Data);
             await _genericBookCrudRepository.Update(book);
             return GenericResponseDto<NoContent>.ResponseData(new NoContent(), (int)ErrorEnum.Success, null);
         }
