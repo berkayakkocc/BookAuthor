@@ -28,7 +28,7 @@ namespace Service
 
         public async Task<GenericResponseDto<NoContent>> CreateEntity(GenericInputDto<CreateBookDto> tEntity)
         {
-            Book book = _mapper.Map<Book>(tEntity);
+            Book book = _mapper.Map<Book>(tEntity.Data);
             await _genericBookCrudRepository.Insert(book);
             return GenericResponseDto<NoContent>.ResponseData(new NoContent(), (int)ErrorEnum.Success, null);
         }

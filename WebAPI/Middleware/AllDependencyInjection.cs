@@ -12,6 +12,7 @@ namespace WebAPI.Middleware
         {
              services.AddTransient(typeof(IGenericCrudRepository<>), typeof(GenericCrudRepository<>));
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IAuthorService, AuthorService>();
             return services;
         }
     }
