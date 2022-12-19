@@ -36,6 +36,12 @@ namespace WebAPI.Controllers
             return await _authorService.UpdateEntity(tEntity);
         }
         [HttpPost()]
+        [Route("create-cross-table-author")]
+        public async Task<GenericResponseDto<NoContent>> CreateAuthorWithCrossTables([FromBody] GenericInputDto<CreateAuthorWithCrossDto> createInputDto)
+        {
+            return await _authorService.CreateAuthorWithCrossTables(createInputDto);
+        }
+        [HttpPost()]
         [Route("get-all-author")]
         public GenericResponseDto<List<AuthorDto>> GetAllEntity(GenericInputDto<NoContent> tEntity)
         {

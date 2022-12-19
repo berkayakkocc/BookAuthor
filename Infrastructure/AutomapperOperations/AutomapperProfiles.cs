@@ -19,6 +19,7 @@ namespace Infrastructure.AutomapperOperations
             CreateMap<Book, BookNavigationDto>().ReverseMap();
             CreateMap<Book, CreateBookDto>().ReverseMap();
             CreateMap<Book, UpdateBookDto>().ReverseMap();
+            CreateMap<Book, CreateBookFromAuthorDto>().ReverseMap();
         }
     }
 }

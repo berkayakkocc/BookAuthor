@@ -15,5 +15,6 @@ namespace Core.Interfaces.PageInterfaces
        IBasicGetByIdEntity<int, AuthorDto>,
        IBasicGetAllEntity<NoContent, List<AuthorDto>>
     {
+        Task<GenericResponseDto<NoContent>> CreateAuthorWithCrossTables(GenericInputDto<CreateAuthorWithCrossDto> tEntities);
     }
 }

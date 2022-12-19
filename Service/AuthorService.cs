@@ -4,6 +4,7 @@ using Core.Dtos.GenericDtos;
 using Core.Dtos.PageDtos.Author;
 using Core.Interfaces.GenericInterfaces;
 using Core.Interfaces.PageInterfaces;
+using Core.Interfaces.PageInterfaces.RepositoryInterfaces;
 using Core.Models.PageEntity;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,19 @@ namespace Service
     {
         private readonly IGenericCrudRepository<Author> _genericAuthorCrudRepository;
         private readonly IMapper _mapper;
+        private IAuthorServiceRepository _authorServiceRepository;
 
-        public AuthorService(IGenericCrudRepository<Author> genericAuthorCrudRepository, IMapper mapper)
+        public AuthorService(IGenericCrudRepository<Author> genericAuthorCrudRepository, IMapper mapper, IAuthorServiceRepository authorServiceRepository)
         {
             _genericAuthorCrudRepository = genericAuthorCrudRepository;
             _mapper = mapper;
+            _authorServiceRepository = authorServiceRepository;
+        }
+
+        public async Task<GenericResponseDto<NoContent>> CreateAuthorWithCrossTables(GenericInputDto<CreateAuthorWithCrossDto> tEntities)
+        {
+            Author createdEntity = await _genericAuthorCrudRepository.Insert(_mapper.Map<Author>(tEntities.Data.CreateAuthor));
+            return await _authorServiceRepository.CreateAuthorWithCrossTable(createdEntity, tEntities.Data);
         }
 
         public async Task<GenericResponseDto<NoContent>> CreateEntity(GenericInputDto<CreateAuthorDto> tEntity)
